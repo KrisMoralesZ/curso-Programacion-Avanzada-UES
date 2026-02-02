@@ -1,0 +1,44 @@
+## Archivos de compilación
+bin/
+obj/
+
+## Archivos de Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Archivos temporales
+*.tmp
+*.temp
+*.log
+
+## Resultados de pruebas
+TestResults/
+*.trx
+
+## Publicaciones
+publish/
+
+## Archivos de configuración locales
+appsettings.Development.json
+appsettings.Local.json
+
+## Paquetes NuGet
+*.nupkg
+packages/
+.nuget/
+
+## Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+## Rider / ReSharper (por si usas otro IDE)
+.idea/
+*.DotSettings.user
+
+## Archivos de respaldo
+*.bak
+*.old
