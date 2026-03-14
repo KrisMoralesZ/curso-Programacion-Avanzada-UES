@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -21,31 +21,35 @@ namespace GestionReportes
 
         private void btnDescargarReporte_Click(object sender, EventArgs e)
         {
-            string conexion = "Data Source=.;Initial Catalog=GestionReportes;Integrated Security=True";
+            string conexion = "Server=127.0.0.1;Database=GestionReportes;Uid=root;Pwd=;";
+
 
             List<Empleado> empleados = new List<Empleado>();
 
             try
             {
-                using (SqlConnection conn = new SqlConnection(conexion))
+                using (MySqlConnection conn = new MySqlConnection(conexion))
                 {
                     conn.Open();
 
                     string query = "SELECT Nombre, Puesto, Salario FROM Empleados";
 
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    while (reader.Read())
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        empleados.Add(new Empleado
+                        while (reader.Read())
                         {
-                            Nombre = reader["Nombre"].ToString(),
-                            Puesto = reader["Puesto"].ToString(),
-                            Salario = Convert.ToDecimal(reader["Salario"])
-                        });
+                            empleados.Add(new Empleado
+                            {
+                                Nombre = reader["Nombre"].ToString(),
+                                Puesto = reader["Puesto"].ToString(),
+                                Salario = Convert.ToDecimal(reader["Salario"])
+                            });
+                        }
                     }
                 }
+
+                MessageBox.Show("Conexion Establecida");
 
                 var empleadosOrdenados = empleados
                                         .OrderBy(emp => emp.Nombre)
@@ -74,7 +78,6 @@ namespace GestionReportes
                 MessageBox.Show("Reporte generado correctamente.");
 
                 this.Close();
-                Application.Exit();
             }
             catch (Exception ex)
             {

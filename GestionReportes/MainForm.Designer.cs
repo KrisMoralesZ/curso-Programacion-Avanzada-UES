@@ -1,4 +1,6 @@
-﻿namespace GestionReportes
+﻿using System.Windows.Forms;
+
+namespace GestionReportes
 {
     partial class MainForm
     {
@@ -50,6 +52,8 @@
             submitButton.Size = new System.Drawing.Size(100, 40);
             submitButton.Text = "Descargar";
             submitButton.UseVisualStyleBackColor = true;
+            submitButton.Click += new System.EventHandler(this.btnDescargarReporte_Click);
+
 
             // Add controls to the form
             this.Controls.Add(titleLabel);
