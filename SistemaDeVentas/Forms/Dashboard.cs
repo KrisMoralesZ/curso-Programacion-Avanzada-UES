@@ -24,6 +24,11 @@ namespace SistemaDeVentas.Forms
             mainForm = main;
             productCards = new List<ProductCard>();
             cartTotal = 0;
+
+            // Make cart label clickable
+            cartCountLabel.Cursor = Cursors.Hand;
+            cartCountLabel.Click += CartCountLabel_Click;
+
             LoadProducts();
         }
 
@@ -56,6 +61,42 @@ namespace SistemaDeVentas.Forms
         {
             cartTotal++;
             cartCountLabel.Text = $"🛒 {cartTotal}";
+        }
+
+        private void CartCountLabel_Click(object sender, EventArgs e)
+        {
+            if (cartTotal == 0)
+            {
+                MessageBox.Show("El carrito esta vacio");
+                return;
+            }
+
+            decimal totalPrice = CalculateCartTotal();
+            CheckoutForm checkout = new CheckoutForm(mainForm, productCards, totalPrice);
+            checkout.ShowDialog();
+
+            // Reset cart after checkout
+            cartTotal = 0;
+            cartCountLabel.Text = "🛒 0";
+            foreach (var card in productCards)
+            {
+                card.SetCantidad(0);
+            }
+        }
+
+        private decimal CalculateCartTotal()
+        {
+            decimal total = 0;
+            foreach (var card in productCards)
+            {
+                int cantidad = card.GetCantidad();
+                if (cantidad > 0)
+                {
+                    Producto producto = card.GetProducto();
+                    total += (producto.Precio * cantidad);
+                }
+            }
+            return total;
         }
 
         public int GetCartTotal()
