@@ -73,5 +73,3 @@ namespace SistemaDeVentas.Forms
         }
     }
 }
-
-

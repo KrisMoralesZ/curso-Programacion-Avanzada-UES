@@ -15,6 +15,7 @@ namespace SistemaDeVentas.Data
         public ClienteData()
         {
             EnsureTableExists();
+            SeedUsers();
         }
 
         private void EnsureTableExists()
@@ -44,6 +45,45 @@ namespace SistemaDeVentas.Data
             catch (Exception ex)
             {
                 throw new Exception("Error creating table: " + ex.Message);
+            }
+        }
+
+        private void SeedUsers()
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(conexion))
+                {
+                    conn.Open();
+
+                    // Check if users already exist
+                    string checkQuery = "SELECT COUNT(*) FROM Clientes";
+                    using (MySqlCommand checkCmd = new MySqlCommand(checkQuery, conn))
+                    {
+                        int count = Convert.ToInt32(checkCmd.ExecuteScalar());
+                        if (count > 0)
+                        {
+                            return; // Users already seeded
+                        }
+                    }
+
+                    // Insert seed users
+                    string seedQuery = @"
+                        INSERT INTO Clientes (Nombre, Correo, Contraseña, Domicilio, Telefono)
+                        VALUES 
+                            ('Admin User', 'admin@example.com', 'admin123', '123 Main St', '555-0001'),
+                            ('Test User', 'test@example.com', 'test123', '456 Test Ave', '555-0002'),
+                            ('Demo User', 'demo@example.com', 'demo123', '789 Demo Rd', '555-0003')";
+
+                    using (MySqlCommand cmd = new MySqlCommand(seedQuery, conn))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error seeding users: " + ex.Message);
             }
         }
 
