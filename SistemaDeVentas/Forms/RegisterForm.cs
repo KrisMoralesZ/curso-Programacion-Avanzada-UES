@@ -12,9 +12,12 @@ namespace SistemaDeVentas.Forms
 {
     public partial class RegisterForm : Form
     {
-        public RegisterForm()
+        private MainForm mainForm;
+
+        public RegisterForm(MainForm main)
         {
             InitializeComponent();
+            mainForm = main;
         }
     }
 }

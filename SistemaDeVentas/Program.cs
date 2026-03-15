@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using SistemaDeVentas.Forms;
 
 namespace SistemaDeVentas
 {
@@ -18,7 +19,7 @@ namespace SistemaDeVentas
       }
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
-      Application.Run(new LoginForm());
+      Application.Run(new MainForm());
 
     }
   }

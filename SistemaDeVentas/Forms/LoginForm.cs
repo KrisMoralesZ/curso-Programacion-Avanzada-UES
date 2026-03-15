@@ -14,18 +14,18 @@ namespace SistemaDeVentas
 {
     public partial class LoginForm : Form
     {
-        public LoginForm()
+        private MainForm mainForm;
+        public LoginForm(MainForm main)
         {
             InitializeComponent();
+            mainForm = main;
         }
            
         private void registerLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
            if (e.Link != null) {
                 e.Link.Visited = true;
-                RegisterForm registerForm = new RegisterForm();
-                registerForm.Show();
-                this.Hide();
+                mainForm.OpenForm(new RegisterForm(mainForm));
             }
         }
     }
