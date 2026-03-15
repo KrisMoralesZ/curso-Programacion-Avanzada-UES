@@ -7,22 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SistemaDeVentas.Data;
 
 namespace SistemaDeVentas.Forms
 {
     public partial class RegisterForm : Form
     {
         private MainForm mainForm;
+        private ClienteData clienteData;
 
         public RegisterForm(MainForm main)
         {
             InitializeComponent();
             mainForm = main;
+            clienteData = new ClienteData();
         }
 
         private void buttonRegister_Click(object sender, EventArgs e)
         {
-            // Add validation and registration logic here
             if (string.IsNullOrWhiteSpace(textBoxUsername.Text))
             {
                 MessageBox.Show("Please enter a username.", "Validation Error");
@@ -39,9 +41,26 @@ namespace SistemaDeVentas.Forms
                 return;
             }
 
-            // TODO: Save user to database
-            MessageBox.Show("Registration successful!", "Success");
-            mainForm.OpenForm(new LoginForm(mainForm));
+            try
+            {
+                bool registered = clienteData.RegistrarCliente(
+                    textBoxUsername.Text,
+                    textBoxEmail.Text,
+                    textBoxPassword.Text,
+                    "",
+                    ""
+                );
+
+                if (registered)
+                {
+                    MessageBox.Show("Usuario Creado Correctamente", "Success");
+                    mainForm.OpenForm(new LoginForm(mainForm));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Registration failed: " + ex.Message, "Error");
+            }
         }
 
         private void linkLabelBackToLogin_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -49,7 +68,7 @@ namespace SistemaDeVentas.Forms
             if (e.Link != null)
             {
                 e.Link.Visited = true;
-                MessageBox.Show("Usuario Creado Correctamente");
+                mainForm.OpenForm(new LoginForm(mainForm));
             }
         }
     }
