@@ -52,12 +52,12 @@
             this.Controls.Add(emailLabel);
 
             // Email TextBox
-            System.Windows.Forms.TextBox emailTextBox = new System.Windows.Forms.TextBox();
-            emailTextBox.Location = new System.Drawing.Point(200, 130);
-            emailTextBox.Name = "emailTextBox";
-            emailTextBox.Size = new System.Drawing.Size(400, 30);
-            emailTextBox.TabIndex = 0;
-            this.Controls.Add(emailTextBox);
+            this.emailTextBox = new System.Windows.Forms.TextBox();
+            this.emailTextBox.Location = new System.Drawing.Point(200, 130);
+            this.emailTextBox.Name = "emailTextBox";
+            this.emailTextBox.Size = new System.Drawing.Size(400, 30);
+            this.emailTextBox.TabIndex = 0;
+            this.Controls.Add(this.emailTextBox);
 
             // Password Label
             System.Windows.Forms.Label passwordLabel = new System.Windows.Forms.Label();
@@ -69,21 +69,21 @@
             this.Controls.Add(passwordLabel);
 
             // Password TextBox
-            System.Windows.Forms.TextBox passwordTextBox = new System.Windows.Forms.TextBox();
-            passwordTextBox.Location = new System.Drawing.Point(200, 210);
-            passwordTextBox.Name = "passwordTextBox";
-            passwordTextBox.Size = new System.Drawing.Size(400, 30);
-            passwordTextBox.TabIndex = 1;
-            passwordTextBox.UseSystemPasswordChar = true;
-            this.Controls.Add(passwordTextBox);
+            this.passwordTextBox = new System.Windows.Forms.TextBox();
+            this.passwordTextBox.Location = new System.Drawing.Point(200, 210);
+            this.passwordTextBox.Name = "passwordTextBox";
+            this.passwordTextBox.Size = new System.Drawing.Size(400, 30);
+            this.passwordTextBox.TabIndex = 1;
+            this.passwordTextBox.UseSystemPasswordChar = true;
+            this.Controls.Add(this.passwordTextBox);
 
             // Login Button
-            System.Windows.Forms.Button loginButton = new System.Windows.Forms.Button();
-            loginButton.Location = new System.Drawing.Point(350, 270);
-            loginButton.Name = "loginButton";
-            loginButton.Size = new System.Drawing.Size(100, 40);
-            loginButton.Text = "Iniciar Sesión";
-            this.Controls.Add(loginButton);
+            this.loginButton = new System.Windows.Forms.Button();
+            this.loginButton.Location = new System.Drawing.Point(350, 270);
+            this.loginButton.Name = "loginButton";
+            this.loginButton.Size = new System.Drawing.Size(100, 40);
+            this.loginButton.Text = "Iniciar Sesión";
+            this.Controls.Add(this.loginButton);
 
             // Register Link
             System.Windows.Forms.Label registerLabel = new System.Windows.Forms.Label();
@@ -94,21 +94,26 @@
             registerLabel.Text = "¿No tienes una Cuenta?";
             this.Controls.Add(registerLabel);
 
-            System.Windows.Forms.LinkLabel registerLink = new System.Windows.Forms.LinkLabel();
-            registerLink.AutoSize = true;
-            registerLink.Font = new System.Drawing.Font("Arial", 10F);
-            registerLink.Location = new System.Drawing.Point(380, 320);
-            registerLink.Name = "registerLink";
-            registerLink.TabIndex = 2;
-            registerLink.TabStop = true;
-            registerLink.Text = "Regístrate";
-            registerLink.LinkColor = System.Drawing.Color.Blue;
-            registerLink.VisitedLinkColor = System.Drawing.Color.Blue;
-            registerLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.registerLinkLabel_LinkClicked);
-            this.Controls.Add(registerLink);
+            this.registerLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.registerLinkLabel.AutoSize = true;
+            this.registerLinkLabel.Font = new System.Drawing.Font("Arial", 10F);
+            this.registerLinkLabel.Location = new System.Drawing.Point(380, 320);
+            this.registerLinkLabel.Name = "registerLinkLabel";
+            this.registerLinkLabel.TabIndex = 2;
+            this.registerLinkLabel.TabStop = true;
+            this.registerLinkLabel.Text = "Regístrate";
+            this.registerLinkLabel.LinkColor = System.Drawing.Color.Blue;
+            this.registerLinkLabel.VisitedLinkColor = System.Drawing.Color.Blue;
+            this.registerLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.registerLinkLabel_LinkClicked);
+            this.Controls.Add(this.registerLinkLabel);
         }
 
         #endregion
+
+        private System.Windows.Forms.TextBox emailTextBox;
+        private System.Windows.Forms.TextBox passwordTextBox;
+        private System.Windows.Forms.Button loginButton;
+        private System.Windows.Forms.LinkLabel registerLinkLabel;
     } 
 }
 

@@ -54,7 +54,7 @@ namespace SistemaDeVentas.Forms
                 if (registered)
                 {
                     MessageBox.Show("Usuario Creado Correctamente", "Success");
-                    mainForm.OpenForm(new LoginForm(mainForm));
+                    mainForm.OpenForm(new Dashboard(mainForm));
                 }
             }
             catch (Exception ex)
